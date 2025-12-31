@@ -33,7 +33,6 @@ stack:
   - "CSS"
   - "HTML"
   - "JSON"
-  - "JavaScript"
   - "C/C++"
   - "Python"
   - "Flutter/Dart"
