@@ -1,0 +1,7 @@
+baseURL = "https://itsunie.github.io/LapTrinhMang/"
+languageCode = "vi-vn"
+title = "Profile"
+
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'

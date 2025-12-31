@@ -1,0 +1,79 @@
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href='{{ "" | relURL }}'>{{ site.Title }}</a>
+
+    <nav class="nav">
+      <a href='{{ "" | relURL }}'>Home</a>
+      <a href='{{ "about/" | relURL }}'>About</a>
+      <a href='{{ "certificate/" | relURL }}'>Certificate</a>
+      <a href='{{ "projects/" | relURL }}'>Projects</a>
+      <a href='{{ "contact/" | relURL }}'>Contact</a>
+    </nav>
+
+    <!-- MUSIC -->
+    <div class="music">
+      <button class="music-pill" type="button" id="musicToggle" aria-label="Play music">
+        <span class="music-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+            <path d="M9 18V6l12-2v12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="7" cy="18" r="3" stroke="currentColor" stroke-width="2"/>
+            <circle cx="19" cy="16" r="3" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </span>
+        <span class="music-label" id="musicLabel">Music</span>
+
+        <span class="music-bars" aria-hidden="true">
+          <i></i><i></i><i></i><i></i>
+        </span>
+      </button>
+
+      <!-- đổi đường dẫn file mp3 tại đây -->
+      <audio id="bgMusic" preload="none" loop>
+        <source src='{{ "audio/bg.mp3" | relURL }}' type="audio/mpeg" />
+      </audio>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const audio = document.getElementById("bgMusic");
+      const btn = document.getElementById("musicToggle");
+      const label = document.getElementById("musicLabel");
+
+      function setUI(isPlaying) {
+        btn.classList.toggle("is-playing", isPlaying);
+        btn.setAttribute("aria-label", isPlaying ? "Pause music" : "Play music");
+        label.textContent = isPlaying ? "Playing" : "Music";
+      }
+
+      const saved = localStorage.getItem("music:on") === "1";
+      setUI(false);
+
+      if (saved) {
+        audio.volume = 0.6;
+        audio.play().then(() => setUI(true)).catch(() => setUI(false));
+      }
+
+      btn.addEventListener("click", async () => {
+        if (audio.paused) {
+          audio.volume = 0.6;
+          try {
+            await audio.play();
+            localStorage.setItem("music:on", "1");
+            setUI(true);
+          } catch (e) {
+            setUI(false);
+          }
+        } else {
+          audio.pause();
+          localStorage.setItem("music:on", "0");
+          setUI(false);
+        }
+      });
+    })();
+  </script>
+</header>
+
+<button id="themeToggle" class="btn theme-toggle" type="button" aria-label="Toggle theme">
+  <span class="theme-ico">🌓</span>
+</button>

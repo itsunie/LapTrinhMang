@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    {{ partial "head.html" . }}
+  </head>
+  <body>
+    {{ partial "header.html" . }}
+    <main class="container">
+      {{ block "main" . }}{{ end }}
+    </main>
+    {{ partial "footer.html" . }}
+  </body>
+  <script>
+(function () {
+  const root = document.documentElement;
+  const btn = document.getElementById("themeToggle");
+  if (!btn) return;
+
+  const KEY = "theme";
+
+  function apply(t){
+    root.setAttribute("data-theme", t);
+    try{ localStorage.setItem(KEY, t); }catch(e){}
+  }
+
+  const saved = (()=>{ try{return localStorage.getItem(KEY);}catch(e){return null;} })();
+  const system = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  apply(saved || system);
+
+  btn.addEventListener("click", ()=>{
+    const cur = root.getAttribute("data-theme") || "light";
+    apply(cur === "dark" ? "light" : "dark");
+  });
+})();
+</script>
+
+</html>

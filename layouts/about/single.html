@@ -1,0 +1,181 @@
+{{ define "main" }}
+<section class="about-wrap enter cv">
+
+{{/* ================= TOP (GIỐNG ẢNH MẪU) ================= */}}
+<header class="cv-top">
+
+  {{/* LEFT: contact lines */}}
+  <div class="cv-top-left">
+    {{ range .Params.facts }}
+      {{- $k := lower .k -}}
+      <div class="cv-line">
+        <span class="cv-dot" aria-hidden="true">
+          {{ if in $k "location" }}
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z" stroke="currentColor" stroke-width="2"/><path d="M12 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="2"/></svg>
+          {{ else if in $k "email" }}
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="2"/><path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="2"/></svg>
+          {{ else if or (in $k "phone") (in $k "number") }}
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M7 4h4l2 5-3 2c1 2.8 3.2 5 6 6l2-3 5 2v4c0 1.1-.9 2-2 2C10.3 22 2 13.7 2 3c0-1.1.9-2 2-2h3Z" stroke="currentColor" stroke-width="2"/></svg>
+          {{ else }}
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="currentColor" stroke-width="2"/><path d="M12 16v-6" stroke="currentColor" stroke-width="2"/><path d="M12 8h.01" stroke="currentColor" stroke-width="2"/></svg>
+          {{ end }}
+        </span>
+
+        <div class="cv-text">
+          {{ if in $k "email" }}
+            <a class="cv-link" href="mailto:{{ .v }}">{{ .v }}</a>
+          {{ else if in $k "github" }}
+            <a class="cv-link" href="{{ .v }}" target="_blank" rel="noreferrer">{{ .v }}</a>
+          {{ else }}
+            <span>{{ .v }}</span>
+          {{ end }}
+        </div>
+      </div>
+    {{ end }}
+  </div>
+
+  {{/* CENTER: ribbon name + role */}}
+  <div class="cv-top-center">
+    <div class="cv-ribbon">
+      <div class="cv-name">{{ .Title }}</div>
+      {{ with .Params.role }}<div class="cv-role">{{ . }}</div>{{ end }}
+    </div>
+  </div>
+
+  {{/* RIGHT: big avatar */}}
+  <div class="cv-top-right">
+    <div class="cv-photo">
+      <img
+        src='{{ with .Params.avatar }}{{ . | relURL }}{{ else }}{{ "img/me.png" | relURL }}{{ end }}'
+        alt="Avatar"
+        loading="eager"
+      />
+    </div>
+  </div>
+
+</header>
+
+
+
+    {{/* ================= OBJECTIVE ================= */}}
+  <section class="about-card cv-objective">
+    <div class="cv-section-title">
+      <span class="cv-badge" aria-hidden="true">🎯</span>
+      <p class="about-kicker">{{ or .Params.sectionObjectiveTitle .Params.sectionStoryTitle "Objective" }}</p>
+    </div>
+
+    {{ with .Params.objective }}
+      <div class="prose about-prose">{{ . | markdownify }}</div>
+    {{ else }}
+      {{ with .Params.story }}
+        <div class="prose about-prose">{{ . | markdownify }}</div>
+      {{ end }}
+    {{ end }}
+  </section>
+
+
+  {{/* ================= 2-COLUMN BODY (like CV) ================= */}}
+  <div class="cv-main">
+
+    {{/* LEFT: Experience + Languages */}}
+    <div class="cv-col">
+      <section class="about-card">
+        <div class="cv-section-title">
+          <span class="cv-badge" aria-hidden="true">💼</span>
+          <p class="about-kicker">{{ or .Params.sectionTimelineTitle "Experience" }}</p>
+        </div>
+
+        <div class="exp-list">
+          {{ range .Params.timeline }}
+            <article class="exp-item">
+              <div class="exp-top">
+                <div>
+                  <div class="exp-when">{{ .when }}</div>
+                  {{ with .desc }}<div class="exp-meta">{{ . }}</div>{{ end }}
+                </div>
+                <div class="exp-title">{{ .title }}</div>
+              </div>
+
+              {{ with .tags }}
+                <div class="chips">
+                  {{ range . }}<span class="chip">{{ . }}</span>{{ end }}
+                </div>
+              {{ end }}
+            </article>
+          {{ end }}
+        </div>
+    
+      </section>
+    </div>
+
+    {{/* RIGHT: Education + Skills + Interests */}}
+    <div class="cv-col">
+      <section class="about-card">
+        <div class="cv-section-title">
+          <span class="cv-badge" aria-hidden="true">🎓</span>
+          <p class="about-kicker">{{ or .Params.sectionEducationTitle "Education" }}</p>
+        </div>
+
+        <div class="cv-edu">
+          {{ range .Params.education }}
+            <div class="cv-edu-item">
+              <div class="cv-edu-top">
+                <b>{{ .school }}</b>
+                {{ with .time }}<span class="cv-muted">{{ . }}</span>{{ end }}
+              </div>
+              {{ with .major }}<div class="cv-muted">{{ . }}</div>{{ end }}
+            </div>
+          {{ else }}
+            <div class="cv-edu-item">
+              <div class="cv-edu-top"><b>TRƯỜNG ĐẠI HỌC CÔNG NGHỆ TPHCM</b><span class="cv-muted">2022</span></div>
+            </div>
+          {{ end }}
+        </div>
+      </section>
+
+      <section class="about-card">
+        <div class="cv-section-title">
+          <span class="cv-badge" aria-hidden="true">⭐</span>
+          <p class="about-kicker">{{ or .Params.sectionSkillsTitle "Skills" }}</p>
+        </div>
+
+        {{/* skills ưu tiên; nếu chưa có -> dùng stack */}}
+        {{ with .Params.skills }}
+          {{ range . }}
+            <div class="cv-skill-group">
+              {{ with .title }}<b class="cv-skill-title">{{ . }}</b>{{ end }}
+              <ul class="cv-list">
+                {{ range .items }}<li>{{ . }}</li>{{ end }}
+              </ul>
+            </div>
+          {{ end }}
+        {{ else }}
+          <div class="chips">
+            {{ range .Params.stack }}
+              <span class="chip chip-accent">{{ . }}</span>
+            {{ end }}
+          </div>
+        {{ end }}
+      </section>
+
+      <section class="about-card">
+        <div class="cv-section-title">
+          <span class="cv-badge" aria-hidden="true">❤️</span>
+          <p class="about-kicker">{{ or .Params.sectionInterestsTitle "Interests" }}</p>
+        </div>
+
+        <ul class="cv-list">
+          {{ range .Params.interests }}
+            <li>{{ . }}</li>
+          {{ else }}
+            <li>Du Lịch</li>
+            <li>Thể Thao</li>
+          {{ end }}
+        </ul>
+      </section>
+    </div>
+
+  </div>
+
+</section>
+{{ end }}

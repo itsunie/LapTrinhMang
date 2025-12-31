@@ -1,0 +1,54 @@
+{{ define "main" }}
+<section class="contact-wrap enter">
+
+  <header class="contact-hero">
+    <p class="kicker">CONTACT</p>
+    <h1 class="headline">{{ .Title }}</h1>
+    {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
+  </header>
+
+  <div class="contact-grid">
+
+    <section class="contact-card">
+      <div class="contact-card-title">Thông tin liên hệ</div>
+
+      <div class="contact-list">
+        {{ range .Params.contactItems }}
+          <a class="contact-row" href="{{ .href }}" target="{{ if hasPrefix .href "http" }}_blank{{ else }}_self{{ end }}" rel="noopener">
+            <div class="contact-label">{{ .label }}</div>
+            <div class="contact-value">{{ .value }}</div>
+          </a>
+        {{ end }}
+      </div>
+    </section>
+
+    {{ if .Params.showForm }}
+    <section class="contact-card">
+      <div class="contact-card-title">Gửi tin nhắn</div>
+
+      {{/* Form tĩnh: dùng Formspree/Getform (không cần backend) */}}
+      <form class="contact-form" method="post" action="{{ with .Params.formAction }}{{ . }}{{ else }}#{{ end }}">
+        <label class="f">
+          <span>Họ tên</span>
+          <input name="name" type="text" autocomplete="name" required>
+        </label>
+
+        <label class="f">
+          <span>Email</span>
+          <input name="email" type="email" autocomplete="email" required>
+        </label>
+
+        <label class="f">
+          <span>Nội dung</span>
+          <textarea name="message" rows="5" required></textarea>
+        </label>
+
+        <button class="btn btn-primary" type="submit">Gửi</button>
+        <p class="contact-note">Nếu dùng Formspree/Getform: thêm formAction trong front-matter.</p>
+      </form>
+    </section>
+    {{ end }}
+
+  </div>
+</section>
+{{ end }}
