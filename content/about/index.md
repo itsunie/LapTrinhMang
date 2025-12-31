@@ -12,6 +12,7 @@ sectionStackTitle: "Tech stack"
 
 story: |
   - Mình là sinh viên năm cuối hiện đang từng bước hoàn thiện kiến thức và kỹ năng để chuẩn bị cho môi trường làm việc thực tế. Mình yêu thích sự đơn giản và rõ ràng trong cách xây dựng sản phẩm, đặc biệt là khi một giải pháp nhỏ có thể mang lại hiệu quả thiết thực.Trong quá trình học mình học chậm rãi chắc chắn và không ngừng cố gắng để tiến bộ hơn mỗi ngày.
+  - " Kỹ năng mềm: Teamwork, Quản lý thời gian,Tự học "
 
   
 
