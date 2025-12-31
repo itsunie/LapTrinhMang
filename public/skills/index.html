@@ -1,16 +1,26 @@
-<header class="site-header">
+<!doctype html>
+<html lang="vi">
+  <head><script src="/LapTrinhMang/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=LapTrinhMang/livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Skills | Profile</title>
+<link rel="stylesheet" href='/LapTrinhMang/css/style.css' />
+
+  </head>
+  <body>
+    <header class="site-header">
   <div class="container header-row">
-    <a class="brand" href='{{ "" | relURL }}'>{{ site.Title }}</a>
+    <a class="brand" href='/LapTrinhMang/'>Profile</a>
 
     <nav class="nav">
-      <a href='{{ "" | relURL }}'>Home</a>
-      <a href='{{ "about/" | relURL }}'>About</a>
-      <a href='{{ "certificate/" | relURL }}'>Certificate</a>
-      <a href='{{ "projects/" | relURL }}'>Projects</a>
-      <a href='{{ "contact/" | relURL }}'>Contact</a>
+      <a href='/LapTrinhMang/'>Home</a>
+      <a href='/LapTrinhMang/about/'>About</a>
+      <a href='/LapTrinhMang/certificate/'>Certificate</a>
+      <a href='/LapTrinhMang/projects/'>Projects</a>
+      <a href='/LapTrinhMang/contact/'>Contact</a>
     </nav>
 
-    <!-- MUSIC -->
+    
     <div class="music">
       <button class="music-pill" type="button" id="musicToggle" aria-label="Play music">
         <span class="music-icon" aria-hidden="true">
@@ -27,9 +37,9 @@
         </span>
       </button>
 
-      <!-- đổi đường dẫn file mp3 tại đây -->
+      
       <audio id="bgMusic" preload="none" loop>
-        <source src='{{ "audio/bg.mp3" | relURL }}' type="audio/mpeg" />
+        <source src='/LapTrinhMang/audio/bg.mp3' type="audio/mpeg" />
       </audio>
       <button id="themeToggle" class="btn theme-toggle" type="button" aria-label="Toggle theme">
         <span class="theme-ico">🌓</span>
@@ -79,3 +89,49 @@
 </header>
 
 
+
+    <main class="container">
+      
+<article class="card">
+  <h1>Skills</h1>
+  <div class="prose"><ul>
+<li>HTML/CSS</li>
+<li>JavaScript</li>
+<li>Git</li>
+</ul>
+</div>
+</article>
+
+    </main>
+    <footer class="site-footer">
+  <div class="container">
+    <small>© 2025 Profile</small>
+  </div>
+</footer>
+
+  </body>
+  <script>
+(function () {
+  const root = document.documentElement;
+  const btn = document.getElementById("themeToggle");
+  if (!btn) return;
+
+  const KEY = "theme";
+
+  function apply(t){
+    root.setAttribute("data-theme", t);
+    try{ localStorage.setItem(KEY, t); }catch(e){}
+  }
+
+  const saved = (()=>{ try{return localStorage.getItem(KEY);}catch(e){return null;} })();
+  const system = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  apply(saved || system);
+
+  btn.addEventListener("click", ()=>{
+    const cur = root.getAttribute("data-theme") || "light";
+    apply(cur === "dark" ? "light" : "dark");
+  });
+})();
+</script>
+
+</html>

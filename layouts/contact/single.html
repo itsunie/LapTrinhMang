@@ -2,7 +2,6 @@
 <section class="contact-wrap enter">
 
   <div class="contact-grid">
-
     <section class="contact-card">
       <div class="contact-card-title">Thông tin liên hệ</div>
 
@@ -20,7 +19,6 @@
     <section class="contact-card">
       <div class="contact-card-title">Gửi tin nhắn</div>
 
-      {{/* Form tĩnh: dùng Formspree/Getform (không cần backend) */}}
       <form class="contact-form" method="post" action="{{ with .Params.formAction }}{{ . }}{{ else }}#{{ end }}">
         <label class="f">
           <span>Họ tên</span>
@@ -37,7 +35,7 @@
           <textarea name="message" rows="5" required></textarea>
         </label>
 
-        <button class="btn btn-primary" type="submit">Gửi</button>
+        <button class="contact-submit" type="submit">Gửi</button>
         <p class="contact-note">Nếu dùng Formspree/Getform: thêm formAction trong front-matter.</p>
       </form>
     </section>

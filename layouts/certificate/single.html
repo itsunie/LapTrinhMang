@@ -14,7 +14,6 @@
           <div class="cert-thumb">
             <img src='{{ .image | relURL }}' alt="{{ .title }}" loading="lazy" />
 
-            <!-- overlay nằm TRONG thumb -->
             <div class="cert-overlay">
               <div class="cert-ov-top">
                 <div class="cert-ov-title">{{ .title }}</div>
@@ -37,6 +36,81 @@
       </article>
     {{ end }}
   </div>
+
+  <!-- FULLSCREEN VIEWER (sẽ được JS chuyển ra document.body để tránh lỗi fixed bị “dính” theo parent transform) -->
+  <div class="cert-fs" id="certFs" aria-hidden="true">
+    <div class="cert-fs__backdrop" data-close="1"></div>
+
+    <div class="cert-fs__panel" role="dialog" aria-modal="true" aria-label="Certificate fullscreen viewer">
+      <button class="cert-fs__close" type="button" aria-label="Close" data-close="1">×</button>
+      <img class="cert-fs__img" id="certFsImg" alt="" />
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const fs = document.getElementById('certFs');
+      const fsImg = document.getElementById('certFsImg');
+
+      // QUAN TRỌNG: chuyển modal ra thẳng <body> để full-screen đúng (tránh parent có transform/filter)
+      if (fs && fs.parentElement !== document.body) document.body.appendChild(fs);
+
+      const openButtons = document.querySelectorAll('.cert-open');
+      let lastFocus = null;
+
+      function openFs(src, alt) {
+        if (!fs || !fsImg) return;
+        lastFocus = document.activeElement;
+
+        fsImg.src = src;
+        fsImg.alt = alt || 'Certificate';
+
+        fs.classList.add('is-open');
+        fs.setAttribute('aria-hidden', 'false');
+        document.documentElement.classList.add('cert-fs-open');
+
+        const closeBtn = fs.querySelector('.cert-fs__close');
+        if (closeBtn) closeBtn.focus();
+      }
+
+      function closeFs() {
+        if (!fs || !fsImg) return;
+
+        fs.classList.remove('is-open');
+        fs.setAttribute('aria-hidden', 'true');
+        document.documentElement.classList.remove('cert-fs-open');
+
+        fsImg.removeAttribute('src');
+        fsImg.alt = '';
+
+        if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+      }
+
+      openButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const card = btn.closest('.cert-card');
+          if (!card) return;
+          const src = card.getAttribute('data-image');
+          const img = card.querySelector('img');
+          if (!src) return;
+          openFs(src, img ? img.getAttribute('alt') : '');
+        });
+      });
+
+      // click backdrop hoặc nút X
+      if (fs) {
+        fs.addEventListener('click', (e) => {
+          const t = e.target;
+          if (t && t.getAttribute && t.getAttribute('data-close') === '1') closeFs();
+        });
+      }
+
+      // ESC
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && fs && fs.classList.contains('is-open')) closeFs();
+      });
+    })();
+  </script>
 
 </section>
 {{ end }}

@@ -1,13 +1,25 @@
 {{ define "main" }}
-<section class="hero card hero-split">
-  <div class="hero-left">
-    <p class="hero-caption-big">
-      I may move slowly, but I’m still moving forward.
-    </p>
+<section class="home-wrap">
+
+  <div class="home-hero-grid">
+
+    <!-- LEFT: text card -->
+    <section class="card home-hero-text">
+      <h1 class="home-title">
+        I may move slowly, but I’m still moving forward.
+      </h1>
+
+      <p class="home-sub">
+        Building clean products, improving every day.
+      </p>
+    </section>
+
+    <!-- RIGHT: image card -->
+    <section class="card home-hero-photo">
+      <img class="home-portrait" src='{{ "img/profile.jpg" | relURL }}' alt="Portrait" loading="eager" />
+    </section>
+
   </div>
 
-  <div class="hero-right hero-right-plain">
-    <img class="portrait" src='{{ "img/profile.jpg" | relURL }}' alt="Portrait" loading="lazy" />
-  </div>
 </section>
 {{ end }}

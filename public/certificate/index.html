@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="vi">
+  <head><script src="/LapTrinhMang/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=LapTrinhMang/livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Chứng chỉ &amp; Thành tích | Profile</title>
+<link rel="stylesheet" href='/LapTrinhMang/css/style.css' />
+
+  </head>
+  <body>
+    <header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href='/LapTrinhMang/'>Profile</a>
+
+    <nav class="nav">
+      <a href='/LapTrinhMang/'>Home</a>
+      <a href='/LapTrinhMang/about/'>About</a>
+      <a href='/LapTrinhMang/certificate/'>Certificate</a>
+      <a href='/LapTrinhMang/projects/'>Projects</a>
+      <a href='/LapTrinhMang/contact/'>Contact</a>
+    </nav>
+
+    
+    <div class="music">
+      <button class="music-pill" type="button" id="musicToggle" aria-label="Play music">
+        <span class="music-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+            <path d="M9 18V6l12-2v12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="7" cy="18" r="3" stroke="currentColor" stroke-width="2"/>
+            <circle cx="19" cy="16" r="3" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </span>
+        <span class="music-label" id="musicLabel">Music</span>
+
+        <span class="music-bars" aria-hidden="true">
+          <i></i><i></i><i></i><i></i>
+        </span>
+      </button>
+
+      
+      <audio id="bgMusic" preload="none" loop>
+        <source src='/LapTrinhMang/audio/bg.mp3' type="audio/mpeg" />
+      </audio>
+      <button id="themeToggle" class="btn theme-toggle" type="button" aria-label="Toggle theme">
+        <span class="theme-ico">🌓</span>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const audio = document.getElementById("bgMusic");
+      const btn = document.getElementById("musicToggle");
+      const label = document.getElementById("musicLabel");
+
+      function setUI(isPlaying) {
+        btn.classList.toggle("is-playing", isPlaying);
+        btn.setAttribute("aria-label", isPlaying ? "Pause music" : "Play music");
+        label.textContent = isPlaying ? "Playing" : "Music";
+      }
+
+      const saved = localStorage.getItem("music:on") === "1";
+      setUI(false);
+
+      if (saved) {
+        audio.volume = 0.6;
+        audio.play().then(() => setUI(true)).catch(() => setUI(false));
+      }
+
+      btn.addEventListener("click", async () => {
+        if (audio.paused) {
+          audio.volume = 0.6;
+          try {
+            await audio.play();
+            localStorage.setItem("music:on", "1");
+            setUI(true);
+          } catch (e) {
+            setUI(false);
+          }
+        } else {
+          audio.pause();
+          localStorage.setItem("music:on", "0");
+          setUI(false);
+        }
+      });
+    })();
+
+  </script>
+</header>
+
+
+
+    <main class="container">
+      
+<section class="certs-wrap enter">
+
+  <header class="certs-hero">
+    <p class="page-kicker">CERTIFICATE</p>
+    <h1 class="headline page-title">Chứng chỉ &amp; Thành tích</h1>
+    <p class="subtitle page-subtitle">Tổng hợp chứng chỉ và kỹ năng</p>
+  </header>
+
+  <div class="certs-grid">
+    
+      <article class="cert-card" data-image='/LapTrinhMang/img/certs/1.png' tabindex="0">
+        <button class="cert-open" type="button" aria-label="Open certificate">
+          <div class="cert-thumb">
+            <img src='/LapTrinhMang/img/certs/1.png' alt="JavaScript Essentials 1" loading="lazy" />
+
+            <div class="cert-overlay">
+              <div class="cert-ov-top">
+                <div class="cert-ov-title">JavaScript Essentials 1</div>
+                <div class="cert-ov-badge">VERIFIED</div>
+              </div>
+
+              <div class="cert-ov-sub">Cấp bởi: Cisco Networking Academy &amp; OpenEDG</div>
+              <div class="cert-ov-sub">Date: 12/2025</div>
+
+              
+                <div class="cert-ov-k">KỸ NĂNG CHUYÊN MÔN</div>
+                <div class="chips">
+                  <span class="chip chip-accent">Functions</span><span class="chip chip-accent">Data Types</span><span class="chip chip-accent">Loops</span><span class="chip chip-accent">Debugging</span><span class="chip chip-accent">Control Flow</span><span class="chip chip-accent">Exception Handling</span>
+                </div>
+              
+            </div>
+
+          </div>
+        </button>
+      </article>
+    
+      <article class="cert-card" data-image='/LapTrinhMang/img/certs/2.png' tabindex="0">
+        <button class="cert-open" type="button" aria-label="Open certificate">
+          <div class="cert-thumb">
+            <img src='/LapTrinhMang/img/certs/2.png' alt="JavaScript Essentials 2" loading="lazy" />
+
+            <div class="cert-overlay">
+              <div class="cert-ov-top">
+                <div class="cert-ov-title">JavaScript Essentials 2</div>
+                <div class="cert-ov-badge">VERIFIED</div>
+              </div>
+
+              <div class="cert-ov-sub">Cấp bởi: Cisco Networking Academy &amp; OpenEDG</div>
+              <div class="cert-ov-sub">Date: 12/2025</div>
+
+              
+                <div class="cert-ov-k">KỸ NĂNG CHUYÊN MÔN</div>
+                <div class="chips">
+                  <span class="chip chip-accent">Inheritance</span><span class="chip chip-accent">OOP</span><span class="chip chip-accent">Data Structures</span><span class="chip chip-accent">Object Manipulation</span><span class="chip chip-accent">Testing Techniques</span><span class="chip chip-accent">Deep Cloning</span>
+                </div>
+              
+            </div>
+
+          </div>
+        </button>
+      </article>
+    
+  </div>
+
+  
+  <div class="cert-fs" id="certFs" aria-hidden="true">
+    <div class="cert-fs__backdrop" data-close="1"></div>
+
+    <div class="cert-fs__panel" role="dialog" aria-modal="true" aria-label="Certificate fullscreen viewer">
+      <button class="cert-fs__close" type="button" aria-label="Close" data-close="1">×</button>
+      <img class="cert-fs__img" id="certFsImg" alt="" />
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const fs = document.getElementById('certFs');
+      const fsImg = document.getElementById('certFsImg');
+
+      
+      if (fs && fs.parentElement !== document.body) document.body.appendChild(fs);
+
+      const openButtons = document.querySelectorAll('.cert-open');
+      let lastFocus = null;
+
+      function openFs(src, alt) {
+        if (!fs || !fsImg) return;
+        lastFocus = document.activeElement;
+
+        fsImg.src = src;
+        fsImg.alt = alt || 'Certificate';
+
+        fs.classList.add('is-open');
+        fs.setAttribute('aria-hidden', 'false');
+        document.documentElement.classList.add('cert-fs-open');
+
+        const closeBtn = fs.querySelector('.cert-fs__close');
+        if (closeBtn) closeBtn.focus();
+      }
+
+      function closeFs() {
+        if (!fs || !fsImg) return;
+
+        fs.classList.remove('is-open');
+        fs.setAttribute('aria-hidden', 'true');
+        document.documentElement.classList.remove('cert-fs-open');
+
+        fsImg.removeAttribute('src');
+        fsImg.alt = '';
+
+        if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+      }
+
+      openButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const card = btn.closest('.cert-card');
+          if (!card) return;
+          const src = card.getAttribute('data-image');
+          const img = card.querySelector('img');
+          if (!src) return;
+          openFs(src, img ? img.getAttribute('alt') : '');
+        });
+      });
+
+      
+      if (fs) {
+        fs.addEventListener('click', (e) => {
+          const t = e.target;
+          if (t && t.getAttribute && t.getAttribute('data-close') === '1') closeFs();
+        });
+      }
+
+      
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && fs && fs.classList.contains('is-open')) closeFs();
+      });
+    })();
+  </script>
+
+</section>
+
+    </main>
+    <footer class="site-footer">
+  <div class="container">
+    <small>© 2025 Profile</small>
+  </div>
+</footer>
+
+  </body>
+  <script>
+(function () {
+  const root = document.documentElement;
+  const btn = document.getElementById("themeToggle");
+  if (!btn) return;
+
+  const KEY = "theme";
+
+  function apply(t){
+    root.setAttribute("data-theme", t);
+    try{ localStorage.setItem(KEY, t); }catch(e){}
+  }
+
+  const saved = (()=>{ try{return localStorage.getItem(KEY);}catch(e){return null;} })();
+  const system = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  apply(saved || system);
+
+  btn.addEventListener("click", ()=>{
+    const cur = root.getAttribute("data-theme") || "light";
+    apply(cur === "dark" ? "light" : "dark");
+  });
+})();
+</script>
+
+</html>

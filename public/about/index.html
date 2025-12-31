@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="vi">
+  <head><script src="/LapTrinhMang/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=LapTrinhMang/livereload" data-no-instant defer></script>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TRƯƠNG THỊ NHƯ THUẬN | Profile</title>
+<link rel="stylesheet" href='/LapTrinhMang/css/style.css' />
+
+  </head>
+  <body>
+    <header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href='/LapTrinhMang/'>Profile</a>
+
+    <nav class="nav">
+      <a href='/LapTrinhMang/'>Home</a>
+      <a href='/LapTrinhMang/about/'>About</a>
+      <a href='/LapTrinhMang/certificate/'>Certificate</a>
+      <a href='/LapTrinhMang/projects/'>Projects</a>
+      <a href='/LapTrinhMang/contact/'>Contact</a>
+    </nav>
+
+    
+    <div class="music">
+      <button class="music-pill" type="button" id="musicToggle" aria-label="Play music">
+        <span class="music-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none">
+            <path d="M9 18V6l12-2v12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="7" cy="18" r="3" stroke="currentColor" stroke-width="2"/>
+            <circle cx="19" cy="16" r="3" stroke="currentColor" stroke-width="2"/>
+          </svg>
+        </span>
+        <span class="music-label" id="musicLabel">Music</span>
+
+        <span class="music-bars" aria-hidden="true">
+          <i></i><i></i><i></i><i></i>
+        </span>
+      </button>
+
+      
+      <audio id="bgMusic" preload="none" loop>
+        <source src='/LapTrinhMang/audio/bg.mp3' type="audio/mpeg" />
+      </audio>
+      <button id="themeToggle" class="btn theme-toggle" type="button" aria-label="Toggle theme">
+        <span class="theme-ico">🌓</span>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const audio = document.getElementById("bgMusic");
+      const btn = document.getElementById("musicToggle");
+      const label = document.getElementById("musicLabel");
+
+      function setUI(isPlaying) {
+        btn.classList.toggle("is-playing", isPlaying);
+        btn.setAttribute("aria-label", isPlaying ? "Pause music" : "Play music");
+        label.textContent = isPlaying ? "Playing" : "Music";
+      }
+
+      const saved = localStorage.getItem("music:on") === "1";
+      setUI(false);
+
+      if (saved) {
+        audio.volume = 0.6;
+        audio.play().then(() => setUI(true)).catch(() => setUI(false));
+      }
+
+      btn.addEventListener("click", async () => {
+        if (audio.paused) {
+          audio.volume = 0.6;
+          try {
+            await audio.play();
+            localStorage.setItem("music:on", "1");
+            setUI(true);
+          } catch (e) {
+            setUI(false);
+          }
+        } else {
+          audio.pause();
+          localStorage.setItem("music:on", "0");
+          setUI(false);
+        }
+      });
+    })();
+
+  </script>
+</header>
+
+
+
+    <main class="container">
+      
+<section class="about-wrap enter cv">
+
+
+<header class="cv-top">
+
+  
+  <div class="cv-top-left">
+    <div class="cv-line">
+        <span class="cv-dot" aria-hidden="true">
+          
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z" stroke="currentColor" stroke-width="2"/><path d="M12 12a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" stroke="currentColor" stroke-width="2"/></svg>
+          
+        </span>
+
+        <div class="cv-text">
+          
+            <span>Thành phố Hồ Chí Minh</span>
+          
+        </div>
+      </div>
+    <div class="cv-line">
+        <span class="cv-dot" aria-hidden="true">
+          
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M4 6h16v12H4V6Z" stroke="currentColor" stroke-width="2"/><path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="2"/></svg>
+          
+        </span>
+
+        <div class="cv-text">
+          
+            <a class="cv-link" href="mailto:truongthinhuthuan92811@gmail.com">truongthinhuthuan92811@gmail.com</a>
+          
+        </div>
+      </div>
+    <div class="cv-line">
+        <span class="cv-dot" aria-hidden="true">
+          
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M7 4h4l2 5-3 2c1 2.8 3.2 5 6 6l2-3 5 2v4c0 1.1-.9 2-2 2C10.3 22 2 13.7 2 3c0-1.1.9-2 2-2h3Z" stroke="currentColor" stroke-width="2"/></svg>
+          
+        </span>
+
+        <div class="cv-text">
+          
+            <span>0773381052</span>
+          
+        </div>
+      </div>
+    <div class="cv-line">
+        <span class="cv-dot" aria-hidden="true">
+          
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20Z" stroke="currentColor" stroke-width="2"/><path d="M12 16v-6" stroke="currentColor" stroke-width="2"/><path d="M12 8h.01" stroke="currentColor" stroke-width="2"/></svg>
+          
+        </span>
+
+        <div class="cv-text">
+          
+            <a class="cv-link" href="https://github.com/itsunie" target="_blank" rel="noreferrer">https://github.com/itsunie</a>
+          
+        </div>
+      </div>
+    
+  </div>
+
+  
+  <div class="cv-top-center">
+    <div class="cv-ribbon">
+      <div class="cv-name">TRƯƠNG THỊ NHƯ THUẬN</div>
+      <div class="cv-role">Information system</div>
+    </div>
+  </div>
+
+  
+  <div class="cv-top-right">
+    <div class="cv-photo">
+      <img
+        src='/LapTrinhMang/img/me.png'
+        alt="Avatar"
+        loading="eager"
+      />
+    </div>
+  </div>
+
+</header>
+
+
+
+    
+  <section class="about-card cv-objective">
+    <div class="cv-section-title">
+      <span class="cv-badge" aria-hidden="true">🎯</span>
+      <p class="about-kicker">Story</p>
+    </div>
+
+    
+      
+        <div class="prose about-prose"><ul>
+<li>Mình là sinh viên năm cuối hiện đang từng bước hoàn thiện kiến thức và kỹ năng để chuẩn bị cho môi trường làm việc thực tế. Mình yêu thích sự đơn giản và rõ ràng trong cách xây dựng sản phẩm, đặc biệt là khi một giải pháp nhỏ có thể mang lại hiệu quả thiết thực.Trong quá trình học mình học chậm rãi chắc chắn và không ngừng cố gắng để tiến bộ hơn mỗi ngày.</li>
+</ul>
+</div>
+      
+    
+  </section>
+
+
+  
+  <div class="cv-main">
+
+    
+    <div class="cv-col">
+      <section class="about-card">
+        <div class="cv-section-title">
+          <span class="cv-badge" aria-hidden="true">💼</span>
+          <p class="about-kicker">Experience</p>
+        </div>
+
+        <div class="exp-list">
+          
+            <article class="exp-item">
+              <div class="exp-top">
+                <div>
+                  <div class="exp-when">[01/03/2025 — 01/06/2025]</div>
+                  <div class="exp-meta">Thực hiện và hoàn thành đố án cơ sở. Tiếp cận mức khá đề tài quản lý cửa hàng lưu niệm.</div>
+                </div>
+                <div class="exp-title">Member</div>
+              </div>
+
+              
+                <div class="chips">
+                  <span class="chip">PHP</span><span class="chip">CSS</span><span class="chip">HTML</span><span class="chip">Bootstrap</span><span class="chip">SQL Server</span>
+                </div>
+              
+            </article>
+          
+            <article class="exp-item">
+              <div class="exp-top">
+                <div>
+                  <div class="exp-when">[27/09/2025 - Present]</div>
+                  <div class="exp-meta">Thực hiện và hoàn thành đồ án chuyên ngành. Tiếp cận tốt đề tài hệ thống rạp phim.</div>
+                </div>
+                <div class="exp-title">Member</div>
+              </div>
+
+              
+                <div class="chips">
+                  <span class="chip">[C#</span><span class="chip">JSON</span><span class="chip">CSS</span><span class="chip">Bootstrap</span><span class="chip">ASP .NET</span><span class="chip">SQL Server</span><span class="chip">Flutter/Dart</span>
+                </div>
+              
+            </article>
+          
+        </div>
+    
+      </section>
+    </div>
+
+    
+    <div class="cv-col">
+      <section class="about-card">
+        <div class="cv-section-title">
+          <span class="cv-badge" aria-hidden="true">🎓</span>
+          <p class="about-kicker">Education</p>
+        </div>
+
+        <div class="cv-edu">
+          
+            <div class="cv-edu-item">
+              <div class="cv-edu-top"><b>TRƯỜNG ĐẠI HỌC CÔNG NGHỆ TPHCM</b><span class="cv-muted">2022 - Present</span></div>
+            </div>
+          
+        </div>
+      </section>
+
+      <section class="about-card">
+        <div class="cv-section-title">
+          <span class="cv-badge" aria-hidden="true">⭐</span>
+          <p class="about-kicker">Skills</p>
+        </div>
+
+        
+        
+          <div class="chips">
+            
+              <span class="chip chip-accent">C#</span>
+            
+              <span class="chip chip-accent">ASP .NET</span>
+            
+              <span class="chip chip-accent">SQL Sever</span>
+            
+              <span class="chip chip-accent">PHP</span>
+            
+              <span class="chip chip-accent">CSS</span>
+            
+              <span class="chip chip-accent">HTML</span>
+            
+              <span class="chip chip-accent">JSON</span>
+            
+              <span class="chip chip-accent">C/C&#43;&#43;</span>
+            
+              <span class="chip chip-accent">Python</span>
+            
+              <span class="chip chip-accent">Flutter/Dart</span>
+            
+          </div>
+        
+      </section>
+
+      <section class="about-card">
+        <div class="cv-section-title">
+          <span class="cv-badge" aria-hidden="true">❤️</span>
+          <p class="about-kicker">Interests</p>
+        </div>
+
+        <ul class="cv-list">
+          
+            <li>Du Lịch</li>
+            <li>Thể Thao</li>
+          
+        </ul>
+      </section>
+    </div>
+
+  </div>
+
+</section>
+
+    </main>
+    <footer class="site-footer">
+  <div class="container">
+    <small>© 2025 Profile</small>
+  </div>
+</footer>
+
+  </body>
+  <script>
+(function () {
+  const root = document.documentElement;
+  const btn = document.getElementById("themeToggle");
+  if (!btn) return;
+
+  const KEY = "theme";
+
+  function apply(t){
+    root.setAttribute("data-theme", t);
+    try{ localStorage.setItem(KEY, t); }catch(e){}
+  }
+
+  const saved = (()=>{ try{return localStorage.getItem(KEY);}catch(e){return null;} })();
+  const system = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  apply(saved || system);
+
+  btn.addEventListener("click", ()=>{
+    const cur = root.getAttribute("data-theme") || "light";
+    apply(cur === "dark" ? "light" : "dark");
+  });
+})();
+</script>
+
+</html>
